@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Compare Products - Almayas Store</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>Almayas Store</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="header-right">
+      <a href="wishlist.html" class="wishlist-link" title="View Wishlist">
+        <i class="fas fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+    </div>
+  </header>
+  
+  <main>
+    <h2>Compare Products</h2>
+    <div id="compare-container">
+      <!-- Compared products will be displayed here -->
+    </div>
+    <button id="clear-compare">Clear Comparison</button>
+  </main>
+  
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const compareContainer = document.getElementById("compare-container");
+      const clearBtn = document.getElementById("clear-compare");
+      let compareList = JSON.parse(localStorage.getItem("compareList")) || [];
+
+      if (compareList.length === 0) {
+        compareContainer.innerHTML = "<p>No products selected for comparison.</p>";
+      } else {
+        let html = "<table border='1' cellpadding='10'><tr><th>Feature</th>";
+        // Table columns for each product
+        compareList.forEach(id => {
+          if (productsData[id]) {
+            html += `<th>${productsData[id].name}</th>`;
+          }
+        });
+        html += `</tr>`;
+        
+        // Now, list some features to compare
+        // Example: Price, Description, Category
+        const features = ["Price", "Description", "Category"];
+        features.forEach(feature => {
+          html += `<tr><td>${feature}</td>`;
+          compareList.forEach(id => {
+            if (productsData[id]) {
+              let value = "";
+              switch(feature) {
+                case "Price":
+                  value = "$" + productsData[id].price.toFixed(2);
+                  break;
+                case "Description":
+                  value = productsData[id].description;
+                  break;
+                case "Category":
+                  value = productsData[id].category || "N/A";
+                  break;
+                default:
+                  value = "N/A";
+              }
+              html += `<td>${value}</td>`;
+            }
+          });
+          html += `</tr>`;
+        });
+        html += "</table>";
+        compareContainer.innerHTML = html;
+      }
+
+      // Clear compare list when clear button is clicked
+      clearBtn.addEventListener("click", function () {
+        localStorage.removeItem("compareList");
+        window.location.reload();
+      });
+    });
+  </script>
+</body>
+</html>

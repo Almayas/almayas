@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Profile - Almayas Store</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <header>
+    <div class="header-left">
+      <h1>Almayas Store</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="header-right">
+      <!-- The header will be updated by auth.js if the user is logged in -->
+      <a href="wishlist.html" class="wishlist-link" title="View Wishlist">
+        <i class="fas fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+      <a href="signup.html">Sign Up</a>
+      <a href="login.html">Login</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="profile-section">
+      <h2>User Profile</h2>
+      <div id="user-info">
+        <!-- User details will be loaded here -->
+      </div>
+    </section>
+  </main>
+
+  <script src="auth.js"></script>
+  <script>
+    // Load and display user info along with wishlist items
+    document.addEventListener("DOMContentLoaded", function () {
+      const currentUser = JSON.parse(localStorage.getItem("user"));
+      const userInfoDiv = document.getElementById("user-info");
+      
+      if (currentUser) {
+        // Display basic user info
+        let html = `
+          <p><strong>Username:</strong> ${currentUser.username}</p>
+          <p><strong>Email:</strong> ${currentUser.email}</p>
+        `;
+        
+        // Retrieve and display wishlist items, if any
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+        if (wishlist.length > 0) {
+          html += `<h3>Your Wishlist:</h3><ul>`;
+          wishlist.forEach(item => {
+            html += `<li>${item.name} - $${item.price.toFixed(2)}</li>`;
+          });
+          html += `</ul>`;
+        } else {
+          html += `<p>Your wishlist is empty.</p>`;
+        }
+        
+        // (Optional) You can add order history or other info here
+        // Retrieve and display order history
+      let orders = JSON.parse(localStorage.getItem("orders")) || [];
+      if (orders.length > 0) {
+        html += `<h3>Order History:</h3><ul>`;
+        orders.forEach(order => {
+          html += `<li>
+            <strong>Date:</strong> ${new Date(order.date).toLocaleString()}<br>
+            <strong>Total:</strong> $${order.total.toFixed(2)}<br>
+            <strong>Items:</strong>
+            <ul>`;
+          order.items.forEach(item => {
+            html += `<li>${item.name} - $${item.price} x ${item.quantity}</li>`;
+          });
+          html += `</ul>
+          </li>`;
+        });
+        html += `</ul>`;
+      } else {
+        html += `<p>No orders yet.</p>`;
+      }
+        
+        userInfoDiv.innerHTML = html;
+      } else {
+        userInfoDiv.innerHTML = "<p>You are not logged in. Please <a href='login.html'>login</a> to view your profile.</p>";
+      }
+    });
+  </script>
+</body>
+</html>

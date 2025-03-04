@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Almayas</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+  <header>
+    <div class="header-left">
+      <h1>Almayas Store</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="checkout.html">Checkout</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="header-right">
+      <a href="wishlist.html" class="wishlist-link" title="View Wishlist">
+        <i class="fas fa-heart"></i>
+        <span id="wishlist-count">0</span>
+      </a>
+      <a href="cart.html" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-count">0</span>
+      </a>
+    </div>
+  </header>
+  <main>
+    <h2>Checkout</h2>
+    <!-- Order Summary Section -->
+    <div id="order-summary">
+      <h3>Order Summary</h3>
+      <ul id="summary-list"></ul>
+      <p><strong>Total:</strong> $<span id="total-price">0.00</span></p>
+    </div>
+
+    <form id="checkout-form">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="address">Shipping Address:</label>
+      <textarea id="address" required></textarea>
+
+      <label for="payment">Payment Method:</label>
+      <select id="payment">
+        <option value="cod">Cash on Delivery</option>
+        <option value="card">Credit/Debit Card</option>
+      </select>
+
+      <!-- Coupon Code Field-->
+      <label for="coupon">Coupon Code:</label>
+      <input type="text" id="coupon" placeholder="Enter coupon code (optional)">
+
+
+      <button type="submit">Place Order</button>
+    </form>
+
+  </main>
+
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>

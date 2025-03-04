@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Almayas Store</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <h1>Almayas Store</h1>
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="checkout.html">Checkout</a></li>
+            <li><a href="compare.html">Compare</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="header-right">
+        <!-- Default links for not logged in users -->
+        <a href="signup.html">Sign Up</a>
+        <a href="login.html">Login</a>
+
+        <a href="wishlist.html" class="wishlist-link" title="View Wishlist">
+          <i class="fas fa-heart"></i>
+          <span id="wishlist-count">0</span>
+        </a>
+        <a href="cart.html" class="cart-link">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count">0</span>
+        </a>
+      </div>
+    </header>
+    <main>
+      <div class="content-container">
+        <!-- Sidebar for filtering and sorting -->
+        <aside class="sidebar">
+
+          <section id="sort-section">
+            <select id="sort-options">
+              <option value="">Sort By</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+            </select>
+          </section>
+
+          <section id="category-filter">
+            <select id="category-select">
+              <option value="">All Categories</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Accessories">Accessories</option>
+              <!-- Add more options as needed -->
+            </select>
+          </section>
+          <section id="price-filter">
+            <h4>Filter by Price</h4>
+            <input type="number" id="min-price" placeholder="Min price" min="0">
+            <input type="number" id="max-price" placeholder="Max price" min="0">
+            <button id="apply-price-filter">Apply</button>
+          </section>          
+        </aside>
+
+        <!-- Main content for search and products -->
+        <section class="main-content">
+
+          <section id="search-section">
+            <!--Search bat product filtering-->
+            <input type="text" id="search" placeholder="Search products..." />
+          </section>     
+
+          <section id="products">
+            <h2>Our Products</h2>
+
+            <div
+              class="product"
+              data-id="1"
+              data-name="Product 1"
+              data-price="10.00"
+              data-category="Electronics"
+            >
+              <a href="product.html?id=1">
+                <img src="images/product1.jpg" alt="Product 1" />
+                <h3>Product 1</h3>
+              </a>
+              <p>$10.00</p>
+              <button class="add-to-cart">Add to Cart</button>
+              <!-- Whishlist Button -->
+              <button class="add-to-wishlist" title="Add to Wishlist">
+                <i class="fas fa-heart"></i>
+              </button>
+              <!-- Compare Button -->
+              <button class="add-to-compare">Compare</button>
+            </div>
+
+            <div
+              class="product"
+              data-id="2"
+              data-name="Product 2"
+              data-price="15.00"
+              data-category="Accessories"
+            >
+              <a href="product.html?id=2">
+                <img src="images/product2.jpg" alt="Product 2" />
+                <h3>Product 2</h3>
+              </a>
+              <p>$15.00</p>
+              <button class="add-to-cart">Add to Cart</button>
+              <!-- Whishlist Button -->
+              <button class="add-to-wishlist" title="Add to Wishlist">
+                <i class="fas fa-heart"></i>
+              </button>
+              <!-- Compare Button -->
+              <button class="add-to-compare">Compare</button>
+            </div>
+          </section>
+          <section id="recently-viewed">
+            <h3>Recently Viewed Products</h3>
+            <div id="recently-viewed-container"></div>
+          </section> 
+        </section> 
+      </div>    
+    </main>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+  </body>
+</html>
